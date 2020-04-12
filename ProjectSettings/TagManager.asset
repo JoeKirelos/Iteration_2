@@ -11,6 +11,10 @@ TagManager:
   - brc
   - EnemyB
   - EnemyA
+  - spawner
+  - bossSpawner
+  - Boss
+  - MiniBoss
   layers:
   - Default
   - TransparentFX

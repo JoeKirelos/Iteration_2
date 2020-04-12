@@ -50,14 +50,11 @@ public class Player : MonoBehaviour
         GetComponent<AudioSource>().clip = nukeActivation;
         GetComponent<AudioSource>().clip = deflecting;
         GetComponent<AudioSource>().playOnAwake = false;
-  
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         horDir = Input.GetAxisRaw("Horizontal");
@@ -69,10 +66,6 @@ public class Player : MonoBehaviour
         StartCoroutine(Nuke());
         StartCoroutine(Blank());
         StartCoroutine(Force());
-        //Debug.Log(blankStart);
-
-
-
     }
     IEnumerator Nuke()
     {
@@ -103,10 +96,6 @@ public class Player : MonoBehaviour
             {
                 blankController.GetComponent<BlankController>().animator.SetTrigger("Activate");
                 GetComponent<AudioSource>().PlayOneShot(blankActivation);
-                //if(blankCD < 7)
-                //{
-                //    blankCD++;
-                //}
                 blanked = true;
                 
                 yield return 0;
@@ -173,7 +162,7 @@ public class Player : MonoBehaviour
                 Miniboss miniboss = hitInfo.transform.GetComponent<Miniboss>();
                 if (miniboss != null)
                 {
-                    miniboss.TakeDamage();
+                    miniboss.TakeDamage(1);
                     if(miniboss.hitPoints <= 0)
                     {
                         enemiesKilled++;
@@ -183,7 +172,7 @@ public class Player : MonoBehaviour
                 Boss boss = hitInfo.transform.GetComponent<Boss>();
                 if (boss != null)
                 {
-                    boss.TakeDamage();
+                    boss.TakeDamage(1);
                     if (boss.hitPoints <= 0)
                     {
                         enemiesKilled++;

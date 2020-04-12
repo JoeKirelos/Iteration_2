@@ -47,11 +47,24 @@ MonoBehaviour:
     type: 3}
   enemyBPrefab: {fileID: 5675716875424961639, guid: 9e42d2a78ca619548b5a38c25cf07bab,
     type: 3}
+  miniPrefab: {fileID: 747761622046553241, guid: b7d8efe1c2fb41d45b9147cfd21ebcbb,
+    type: 3}
   spawnPoint: {fileID: 3085055680384776721}
-  shootingInt: 0
-  randomizerEnemyInt: 0
+  shootingIntervalEnemyA: 0
+  randomizerEnemyAInt: 0
   bounceEnemyInt: 0
   enemyInitialShoot: 0
+  EnemyBshootingCooldown: 0
+  enemyBAccuracy: 0
   movement: {x: 1, y: 1, z: 0}
   speed: 0
   self: {fileID: 3085055680384776723}
+  sniperThreshold: 0
+  miniThreshold: 0
+  corner: {fileID: 0}
+  waveCounter: 0
+  waveMax: 10
+  spawnRate: 0
+  bossSpawned: 0
+  bossAlive: 0
+  bossSpawner: {fileID: 0}

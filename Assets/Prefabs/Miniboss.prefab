@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 602889898606328298}
   - component: {fileID: 6246089426766904633}
   - component: {fileID: 1471255934728819070}
+  - component: {fileID: 583583846185884963}
   m_Layer: 0
   m_Name: ripple
   m_TagString: Untagged
@@ -117,6 +118,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &583583846185884963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612142794865751989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1bad1607e7b8c4aa032da966c8d109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6246089426766904633}
 --- !u!1 &747761621225872758
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +237,7 @@ GameObject:
   - component: {fileID: 747761622046553235}
   m_Layer: 0
   m_Name: Miniboss
-  m_TagString: Untagged
+  m_TagString: MiniBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,6 +343,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5574035660125077447, guid: 6b973f70e5f6802469a87ee4446b0fe1,
     type: 3}
+  rippleController: {fileID: 612142794865751989}
+  currentEnemies: []
   spawnPoint: {fileID: 747761621225872759}
   spawnPoint2: {fileID: 747761621507014413}
   spawnPoint3: {fileID: 747761622870795828}
@@ -339,6 +355,7 @@ MonoBehaviour:
   speed: 30
   moving: 0
   hitPoints: 20
+  alive: 1
 --- !u!50 &747761622046553234
 Rigidbody2D:
   serializedVersion: 4

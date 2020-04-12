@@ -6,6 +6,7 @@ public class spawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject enemyBPrefab;
+    public GameObject miniPrefab;
     public Transform spawnPoint;
     GameObject currentEnemy;
     public float shootingIntervalEnemyA;
@@ -18,13 +19,18 @@ public class spawner : MonoBehaviour
     public float speed;
     public GameObject self;
     public int sniperThreshold;
+    public int miniThreshold;
     public Transform corner;
     public int waveCounter;
     public int waveMax = 10;
     public float spawnRate;
+    public bool bossSpawned;
+    public bool bossAlive;
+    public GameObject bossSpawner;
     // Start is called before the first frame update
     void Start()
     {
+        bossSpawner = GameObject.FindWithTag("bossSpawner");
         spawnRate = 5;
         StartCoroutine(Spawn());
         StartCoroutine(OneTwo());
@@ -34,6 +40,8 @@ public class spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bossSpawned = bossSpawner.GetComponent<BossSpawner>().bossSpawned;
+        bossAlive = bossSpawner.GetComponent<BossSpawner>().bossAlive;
         self.transform.position += (movement * speed * Time.deltaTime);
 
     }
@@ -41,6 +49,7 @@ public class spawner : MonoBehaviour
     IEnumerator WaveControl()
     {
         yield return new WaitForSeconds(10);
+        bossSpawner.GetComponent<BossSpawner>().bossSpawned = false;
         if (waveCounter >= waveMax)
         {
             waveCounter = 0;
@@ -59,13 +68,17 @@ public class spawner : MonoBehaviour
             if ( currentEnemy == null && waveCounter < waveMax)
             {
                 waveCounter++;
-                int percent = Random.Range(0, 10);
+                int percent = Random.Range(0, 100);
                 if (percent > sniperThreshold)
                 {
                     currentEnemy = (Instantiate(enemyBPrefab, spawnPoint.position, spawnPoint.rotation));
                     currentEnemy.GetComponent<enemyB>().trackingUpdate = enemyBAccuracy;
                     currentEnemy.GetComponent<enemyB>().tracker = EnemyBshootingCooldown;
                     currentEnemy.GetComponent<enemyB>().target = corner;
+                }
+                else if( percent < sniperThreshold && percent > miniThreshold)
+                {
+                    currentEnemy = (Instantiate(miniPrefab, spawnPoint.position, spawnPoint.rotation));
                 }
                 else
                 {
@@ -78,7 +91,14 @@ public class spawner : MonoBehaviour
 
             }else if( waveCounter >= waveMax)
             {
-                StartCoroutine(WaveControl());
+                if(bossSpawned == false)
+                {
+                    bossSpawner.GetComponent<BossSpawner>().spawnTiming = true;
+                }
+                if (bossSpawned == true && bossAlive == false)
+                {
+                    StartCoroutine(WaveControl());
+                }
             }
 
         }

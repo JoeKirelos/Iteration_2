@@ -6,10 +6,7 @@ public class Miniboss : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject rippleController;
-    GameObject currentA;
-    GameObject currentB;
-    GameObject currentC;
-    GameObject currentD;
+    public GameObject[] currentEnemies;
     public Transform spawnPoint;
     public Transform spawnPoint2;
     public Transform spawnPoint3;
@@ -21,6 +18,7 @@ public class Miniboss : MonoBehaviour
     public float speed;
     public bool moving = false;
     public int hitPoints = 10;
+    public bool alive = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +31,10 @@ public class Miniboss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.GetComponent<Player>().nuked)
+        {
+            TakeDamage(10);
+        }
         if (moving)
         {
             transform.position -= target  * speed * Time.deltaTime;
@@ -61,32 +63,34 @@ public class Miniboss : MonoBehaviour
         rippleController.GetComponent<MiniRippleController>().animator.SetTrigger("Ripple");
         moving = false;
     }
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        hitPoints -= 1;
+        hitPoints -= damage;
     }
     public void DestroySelf()
     {
-        currentA = (Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation));
-        currentA.GetComponent<enemyA>().initialShoot =0.2f;
-        currentA.GetComponent<enemyA>().shootInterval = 1f;
-        currentA.GetComponent<enemyA>().randomizerInt = 1.5f;
-        currentA.GetComponent<enemyA>().bounceInt = 0.5f;
-        currentB = (Instantiate(enemyPrefab, spawnPoint2.position, spawnPoint2.rotation));
-        currentB.GetComponent<enemyA>().initialShoot = 0.2f;
-        currentB.GetComponent<enemyA>().shootInterval = 0.5f;
-        currentB.GetComponent<enemyA>().randomizerInt = 0.5f;
-        currentB.GetComponent<enemyA>().bounceInt = 2f;
-        currentC = (Instantiate(enemyPrefab, spawnPoint3.position, spawnPoint3.rotation));
-        currentC.GetComponent<enemyA>().initialShoot = 0.1f;
-        currentC.GetComponent<enemyA>().shootInterval = 1f;
-        currentC.GetComponent<enemyA>().randomizerInt = 1.5f;
-        currentC.GetComponent<enemyA>().bounceInt = 0.5f;
-        currentD = (Instantiate(enemyPrefab, spawnPoint4.position, spawnPoint4.rotation));
-        currentD.GetComponent<enemyA>().initialShoot = 0.1f;
-        currentD.GetComponent<enemyA>().shootInterval = 0.5f;
-        currentD.GetComponent<enemyA>().randomizerInt = 0.5f;
-        currentD.GetComponent<enemyA>().bounceInt = 2f;
+        currentEnemies = new GameObject[4];
+        currentEnemies[0] = (Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation));
+        currentEnemies[0].GetComponent<enemyA>().initialShoot = 0.2f;
+        currentEnemies[0].GetComponent<enemyA>().shootInterval = 1f;
+        currentEnemies[0].GetComponent<enemyA>().randomizerInt = 1.5f;
+        currentEnemies[0].GetComponent<enemyA>().bounceInt = 0.5f;
+        currentEnemies[1] = (Instantiate(enemyPrefab, spawnPoint2.position, spawnPoint2.rotation));
+        currentEnemies[1].GetComponent<enemyA>().initialShoot = 0.2f;
+        currentEnemies[1].GetComponent<enemyA>().shootInterval = 0.5f;
+        currentEnemies[1].GetComponent<enemyA>().randomizerInt = 0.5f;
+        currentEnemies[1].GetComponent<enemyA>().bounceInt = 2f;
+        currentEnemies[2] = (Instantiate(enemyPrefab, spawnPoint3.position, spawnPoint3.rotation));
+        currentEnemies[2].GetComponent<enemyA>().initialShoot = 0.1f;
+        currentEnemies[2].GetComponent<enemyA>().shootInterval = 1f;
+        currentEnemies[2].GetComponent<enemyA>().randomizerInt = 1.5f;
+        currentEnemies[2].GetComponent<enemyA>().bounceInt = 0.5f;
+        currentEnemies[3] = (Instantiate(enemyPrefab, spawnPoint4.position, spawnPoint4.rotation));
+        currentEnemies[3].GetComponent<enemyA>().initialShoot = 0.1f;
+        currentEnemies[3].GetComponent<enemyA>().shootInterval = 0.5f;
+        currentEnemies[3].GetComponent<enemyA>().randomizerInt = 0.5f;
+        currentEnemies[3].GetComponent<enemyA>().bounceInt = 2f;
+        alive = false;
         Destroy(self);
     }
 }

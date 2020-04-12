@@ -70,6 +70,14 @@ public class bullets : MonoBehaviour
             {
                 collision.GetComponent<enemyB>().DestroySelf();
             }
+            if (collision.CompareTag("Boss"))
+            {
+                collision.GetComponent<Boss>().TakeDamage(1);
+            }
+            if (collision.CompareTag("MiniBoss"))
+            {
+                collision.GetComponent<Miniboss>().TakeDamage(1);
+            }
         }
     }
 }

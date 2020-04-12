@@ -5,10 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject miniPrefab;
     public GameObject rippleController;
-    public Transform spawnPoint;
-    public Transform spawnPoint2;
     public GameObject player;
     public Transform playerRB;
     Vector3 target;
@@ -16,9 +13,11 @@ public class Boss : MonoBehaviour
     public float speed;
     public bool moving = false;
     public int hitPoints = 40;
+    public GameObject mySpawner;
     // Start is called before the first frame update
     void Start()
     {
+        mySpawner = GameObject.FindWithTag("bossSpawner");
         player = GameObject.FindWithTag("Player");
         playerRB = player.transform;
         target = (transform.position - playerRB.position).normalized;
@@ -28,6 +27,10 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.GetComponent<Player>().nuked)
+        {
+            TakeDamage(10);
+        }
         if (moving)
         {
             transform.position -= target * speed * Time.deltaTime;
@@ -56,14 +59,13 @@ public class Boss : MonoBehaviour
         rippleController.GetComponent<BossRippleController>().animator.SetTrigger("Ripple");
         moving = false;
     }
-    public void TakeDamage()
+    public void TakeDamage( int damage)
     {
-        hitPoints -= 1;
+        hitPoints -= damage;
     }
     public void DestroySelf()
     {
-        Instantiate(miniPrefab, spawnPoint.position, spawnPoint.rotation);
-        Instantiate(miniPrefab, spawnPoint2.position, spawnPoint.rotation);
+        mySpawner.GetComponent<BossSpawner>().bossAlive = false;
         Destroy(self);
     }
 }

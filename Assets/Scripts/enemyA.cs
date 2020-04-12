@@ -22,7 +22,7 @@ public class enemyA : MonoBehaviour
     public float bounceInt;
     public float initialShoot;
     public Animator animator;
-
+    public bool alive = true;
     public AudioClip spitting;
     // Start is called before the first frame update
     void Start()
@@ -101,6 +101,7 @@ public class enemyA : MonoBehaviour
 
     public void DestroySelf()
     {
+        alive = false;
         Destroy(self);
     }
 }

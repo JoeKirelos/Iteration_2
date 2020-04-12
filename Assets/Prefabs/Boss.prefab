@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3771848614650529602}
   - component: {fileID: 8244516956074108922}
   - component: {fileID: 9063105132289719830}
+  - component: {fileID: 4215961416709197149}
   m_Layer: 0
   m_Name: ripple
   m_TagString: Untagged
@@ -28,10 +29,10 @@ Transform:
   m_GameObject: {fileID: 488802421226515433}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 8964756864587386768}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &3771848614650529602
 CircleCollider2D:
@@ -117,66 +118,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8964756863642056113
-GameObject:
+--- !u!114 &4215961416709197149
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8964756863642056112}
-  m_Layer: 0
-  m_Name: GameObject (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8964756863642056112
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964756863642056113}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.02, y: 3.43, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8964756864587386768}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8964756863680112918
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8964756863680112905}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8964756863680112905
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8964756863680112918}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.45, y: -4.99, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8964756864587386768}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 488802421226515433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90da149748a14144694731c03f879808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8244516956074108922}
 --- !u!1 &8964756864587386783
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +147,7 @@ GameObject:
   - component: {fileID: 8964756864587386770}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,8 +163,6 @@ Transform:
   m_LocalPosition: {x: 43.3, y: 13.8, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
-  - {fileID: 8964756863680112905}
-  - {fileID: 8964756863642056112}
   - {fileID: 7133267642433055554}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -295,17 +247,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68edb67e98a36f4468c9245ceb313a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniPrefab: {fileID: 747761622046553241, guid: b7d8efe1c2fb41d45b9147cfd21ebcbb,
-    type: 3}
-  spawnPoint: {fileID: 8964756863680112905}
-  spawnPoint2: {fileID: 8964756863642056112}
+  rippleController: {fileID: 488802421226515433}
   player: {fileID: 0}
   playerRB: {fileID: 0}
-  animator: {fileID: 8964756864587386782}
   self: {fileID: 8964756864587386783}
   speed: 40
   moving: 0
   hitPoints: 40
+  mySpawner: {fileID: 0}
 --- !u!50 &8964756864587386773
 Rigidbody2D:
   serializedVersion: 4
